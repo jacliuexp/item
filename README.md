@@ -6,6 +6,9 @@ print(response.status_code)
 print(response.text)
 ```
 
+```
+terraform plan  -destroy --target=module.mymodule.aws_instance.postgres
+```
 
 ```
 export TF_LOG=DEBUG  (RACE, DEBUG, INFO, WARN or ERROR)
