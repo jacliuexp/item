@@ -34,7 +34,7 @@ psql → show data_directory
 postgres=# show data_directory;
      data_directory
 ------------------------
- /mnt/lib/pgsql/13/data
+ /lib/pgsql/13/data
 (1 row)
 
 postgres=# show port;
@@ -58,7 +58,7 @@ postgres=# show max_connections;
 postgres=# select name, source, boot_val, sourcefile, pending_restart from pg_settings where name='max_connections';
       name       |       source       | boot_val |               sourcefile               | pending_restart
 -----------------+--------------------+----------+----------------------------------------+-----------------
- max_connections | configuration file | 100      | /mnt/lib/pgsql/13/data/postgresql.conf | f
+ max_connections | configuration file | 100      | /lib/pgsql/13/data/postgresql.conf | f
 (1 row)
 
 postgres=#
@@ -119,5 +119,5 @@ echo cons | nc zk-0 2181 ; echo
 ./kafka-console-producer.sh --bootstrap-server zk-0:9092 --topic aaa
 ./kafka-console-consumer.sh --bootstrap-server zk-0:9092 --topic aaa --from-beginning
 
-/mnt/kafka/kafka-logs/mytopic-0
+/kafka/kafka-logs/mytopic-0
 ```
