@@ -125,6 +125,7 @@ echo cons | nc zk-0 2181 ; echo
 /kafka/kafka-logs/mytopic-0
 ```
 ```
+    receivers:
     - name: 'default'
       msteams_configs:
       - send_resolved: true
@@ -143,4 +144,19 @@ echo cons | nc zk-0 2181 ; echo
         webhook_url: 'https://mycompany.webhook.office.com/webhookb2/824d277e-7b66-465c-acfe-ed5a247699e1@be67623c-1932-42a6-9d24-6c359fe5ea71/IncomingWebhook/8c05bae9d4a24fbd8bc48e50dda9c1fb/412501ee-8dcf-4aff-a499-9a56098e769f/V2x9qQyhy0SPhw4CHujS7IQa3g5li5JaKDrjgAstn5wms1'
         title: '{{ if eq .Status "firing" }}🚨 **FIRING** 🔥{{- else -}}🙌 **RESOLVED** 🍻{{- end -}}'
         text: '{{ template "msteams.text" . }}'
+
+  templateFiles:
+       msteams.tmpl: |-
+      {{ define "msteams.text" -}}
+      **Alert:** {{ .CommonLabels.alertname }}\
+      **Service:** {{ .CommonLabels.service }}\
+      **Severity:** {{ .CommonLabels.severity | title -}}\
+      {{- if (index .Alerts 0).Annotations.summary }}
+      **Summary:** {{ (index .Alerts 0).Annotations.summary }}
+      {{- end }}
+      {{ range .Alerts }}
+      {{- if .Annotations.description }}{{ .Annotations.description }}\{{- end }}
+      {{- if .Annotations.message }}{{ .Annotations.message }}\{{- end }}
+      {{- end }}
+      {{- end }}  
 ```
