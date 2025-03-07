@@ -61,7 +61,7 @@ postgres=# show max_connections;
 postgres=# select name, source, boot_val, sourcefile, pending_restart from pg_settings where name='max_connections';
       name       |       source       | boot_val |               sourcefile               | pending_restart
 -----------------+--------------------+----------+----------------------------------------+-----------------
- max_connections | configuration file | 100      | /lib/pgsql/13/data/postgresql.conf | f
+ max_connections | configuration file | 100      | /mydata/lib/pgsql/13/data/postgresql.conf | f
 (1 row)
 
 postgres=#
